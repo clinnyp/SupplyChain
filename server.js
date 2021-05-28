@@ -8,5 +8,5 @@ app.get('/', function (req, res) {
  
 const PORT = 7000 || process.env.PORT;
 app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${PORT}`)
   })
