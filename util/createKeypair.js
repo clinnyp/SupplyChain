@@ -1,4 +1,5 @@
 const { Keyring, KeyringPair } = require('@polkadot/keyring');
+const fs = require('fs');
 
 module.exports = async function createKeypair(keyPairPath, password) {
     let keyring = new Keyring({ type: 'sr25519' });
