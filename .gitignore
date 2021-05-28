@@ -1,3 +1,8 @@
 node_modules/**/*
 accounts/*
+<<<<<<< HEAD
+util/easyRun.js
+util/5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn.json
+=======
 .vscode/
+>>>>>>> 255db7da8e68cf0162fee9c59f07418bbc9747d3
