@@ -2,7 +2,7 @@ const { Api } = require('@cennznet/api');
 const { Keyring, KeyringPair } = require('@polkadot/keyring');
 const fs = require('fs');
 const { exit } = require('process');
-const createKeypair = require('./util/createKeypair');
+const createKeypair = require('../util/createKeypair');
 // A websocket address for some CENNZnet full nodes
 const NIKAU_WS = 'wss://nikau.centrality.me/public/ws';
 
