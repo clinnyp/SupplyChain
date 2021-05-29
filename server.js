@@ -23,11 +23,6 @@ let delegators = [
     [7, "farmer7", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
 ]
 
-app.get('/', function (req, res) {
-    let test = { "data": "this is a test object", "array": [0, 1, 2] }
-    res.send(test)
-})
-
 async function _initialize(api, tokenId) {
     let data = {}
     data.stakingAssetId = await api.query.genericAsset.stakingAssetId(); // 1 on MainNet
@@ -41,25 +36,6 @@ async function _initialize(api, tokenId) {
     data.timestamp = Date.now();
 
     return data;
-}
-
-async function _burn(api) {
-    let delegator = await createKeypair(FONTERRA_PATH, PASSWORD);
-    let hasBurned = await api.tx.nft.burn(tokenId)
-        .signAndSend(delegator, async ({ status, events }) => {
-            return new Promise((resolve, reject) => {
-                if (status.isInBlock) {
-                    events.forEach(({ phase, event: { data, method, section } }) => {
-                        console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
-                    });
-                    console.log(`txID: ${status.asInBlock.toString()}`);
-                    resolve();
-                }
-                reject();
-            })
-
-        });
-    return hasBurned;
 }
 
 async function main() {
