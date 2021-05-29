@@ -32,12 +32,13 @@ module.exports = {
         tokenExtrinsic.signAndSend(delegator, ({ status }) => {
             if (status.isInBlock) {
                 const txId = status.asInBlock.toString();
+                events.forEach(({ phase, event: { data, method, section } }) => {
+                    console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
+                });
                 console.log(`Completed at block hash #${txId}`);
-                return Promise.resolve(txId);
             }
         }).catch((error) => {
             console.log(':( transaction failed', error);
-            return Promise.reject(error);
         });
     },
 
@@ -72,12 +73,13 @@ module.exports = {
         tokenExtrinsic.signAndSend(delegator, ({ status }) => {
             if (status.isInBlock) {
                 const txId = status.asInBlock.toString();
+                events.forEach(({ phase, event: { data, method, section } }) => {
+                    console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
+                });
                 console.log(`Completed at block hash #${txId}`);
-                return Promise.resolve(txId);
             }
         }).catch((error) => {
             console.log(':( transaction failed', error);
-            return Promise.reject(error);
         });
     },
 
@@ -92,6 +94,7 @@ module.exports = {
         api.tx.nft.burn(tokenId)
             .signAndSend(delegator, async ({ status, events }) => {
                 if (status.isInBlock) {
+                    const txId = status.asInBlock.toString();
                     events.forEach(({ phase, event: { data, method, section } }) => {
                         console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
                     });
