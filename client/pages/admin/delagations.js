@@ -3,7 +3,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // layout for this page
 import Admin from "layouts/Admin.js";
-import AddDelagates from '../../components/AddDelegates/AddDelegates'
 // core components
 import Quote from "components/Typography/Quote.js";
 import Muted from "components/Typography/Muted.js";
@@ -15,7 +14,18 @@ import Danger from "components/Typography/Danger.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
-import NewDelegateSign from "../../components/AddDelegates/newDelegateSign"
+import Icon from "@material-ui/core/Icon";
+import BugReport from "@material-ui/icons/BugReport";
+
+
+// core components
+import GridItem from "components/Grid/GridItem.js";
+import GridContainer from "components/Grid/GridContainer.js";
+import Table from "components/Table/Table.js";
+import Tasks from "components/Tasks/Tasks.js";
+import CustomTabs from "components/CustomTabs/CustomTabs.js";
+import CardIcon from "components/Card/CardIcon.js";
+
 
 const styles = {
   typo: {
@@ -63,9 +73,37 @@ function DelagationsPage() {
         <h4 className={classes.cardTitleWhite}>Your delegations</h4>
       </CardHeader>
       <CardBody>
-        <AddDelagates />
-        <AddDelagates />
-        <AddDelagates />
+      <div>
+      
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={12} >
+          <CustomTabs
+            title="Entities:"
+            headerColor="dark"
+            tabs={[
+              {
+                tabName: "Delegators",
+                tabIcon: BugReport,
+                tabContent: (
+                  <Tasks
+                    checkedIndexes={[0, 3]}
+                    tasksIndexes={[0, 1, 2, 3, 4, 5, 6, 7]}
+                    tasks={[]}
+                  />
+                ),
+              },
+              {
+                tabName: "Add a delegate",
+                tabIcon: BugReport,
+              }
+
+            ]}
+          />
+        </GridItem>
+
+        
+      </GridContainer>
+    </div>
       </CardBody>
     </Card>
   );
