@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -35,10 +35,25 @@ import { bugs, website, server } from "variables/general.js";
 
 
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
+import getBalances from '../../util/getBalances.js'
+
+
+
+
 
 function Dashboard() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+
+  const [balance, setBalance] = useState([0,0])
+  const {CENNZ, CPAY} = getBalances
+
+  useEffect(() => {
+    [CENNZ, CPAY] = getBalances
+    setBalance[0] = CENNZ
+    setBalance[1] = CPAY
+  })
+
   return (
     <div>
       <GridContainer>
@@ -50,7 +65,7 @@ function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Centrality CENNZ</p>
               <h3 className={classes.cardTitle}>
-                49/50 <small>GB</small> 
+                {balance[0]} <small>CENNZ</small> 
               </h3>
             </CardHeader>
           </Card>
