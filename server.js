@@ -33,7 +33,6 @@ async function _initialize(api, tokenId) {
     data.locks = await api.query.genericAsset.locks(FONTERRA);
     data.asset = await api.rpc.genericAsset.registeredAssets();
     data.delegators = delegators;
-    data.delegatorAddresses = delegatorAddresses;
     data.timestamp = Date.now();
 
     return data;
@@ -69,11 +68,5 @@ async function main() {
 
 main().then(() => { }).catch((err) => {
     console.log(`Main Error: ${err}`)
-    exit(1)
 });
 
-
-const PORT = 7000 || process.env.PORT;
-app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`)
-})
