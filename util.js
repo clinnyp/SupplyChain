@@ -58,7 +58,7 @@ module.exports = {
 
             list.push(delegate);
         }
-
+        console.log(list)
         return list;
 
     },
@@ -110,7 +110,7 @@ module.exports = {
      * @param {KeyringPair} delegator 
      * @param {Array} tokenId 
      */
-    burn: async (api, delegator, tokenId) => {
+    revoke: async (api, delegator, tokenId) => {
         console.log(`Revoking ${tokenOwner} from delegators`)
         api.tx.nft.burn(tokenId)
             .signAndSend(delegator, async ({ status, events }) => {
