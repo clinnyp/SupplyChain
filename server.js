@@ -1,21 +1,5 @@
 const { Api } = require('@cennznet/api');
 const express = require('express')
-<<<<<<< HEAD
-const utils = require('util')
-const app = express()
-app.use(express.static('public'))
- 
-app.get('/', function (req, res) {
-    let test = {"data": "this is a test object", "array": [0,1,2]}
-    res.sendFile(__dirname + '/public/test.html');
-})
-
-app.post('/mint', function (req, res) {
-    const farmer_address = req.params.user_address;
-    utils.delegatePermissions(farmer_address, keypairPath, password);
-    console.log(`permissions successfully delegated`);
-    res.sendFile(__dirname + '/public/test.html');
-=======
 var cors = require('cors')
 const app = express();
 
@@ -28,7 +12,6 @@ app.use(cors())
 app.get('/', function (req, res) {
     let test = { "data": "this is a test object", "array": [0, 1, 2] }
     res.send(test)
->>>>>>> 11419f92e74c57503d57245cc23748d3c56f0f83
 })
 
 app.get('/admin/balance', async (req, res) => {

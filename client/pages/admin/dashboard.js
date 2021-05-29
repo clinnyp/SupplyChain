@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -32,31 +32,36 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import { bugs, website, server } from "variables/general.js";
-
-
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
-import getBalances from '../../util/getBalances.js'
-
-
-
-
+import axios from "axios";
 
 function Dashboard() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-
-  const [balance, setBalance] = useState([0,0])
-  const {CENNZ, CPAY} = getBalances
+  const [data, setData] = useState({});
+  const [balance, setBalance] = useState({ "CENNZ": 0, "CPAY": 0 })
+  const [delegators, setDelegators] = useState([[null, null, null ]]);
+  const [delegatorAddr, setDelegatorAddr] = useState([]);
 
   useEffect(() => {
-    [CENNZ, CPAY] = getBalances
-    setBalance[0] = CENNZ
-    setBalance[1] = CPAY
-  })
+    const fetchData = async () => {
+      const result = await axios(
+        'http://localhost:7000/',
+      );
+      setData(result.data);
+      setBalance({ "CENNZ": result.data.CENNZ, "CPAY": result.data.CPAY });
+      setDelegators(result.data.delegators)
+      setDelegatorAddr(result.data.delegatorAddresses);
+      console.log(bugs)
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
       <GridContainer>
+
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="dark" stats icon>
@@ -65,99 +70,51 @@ function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Centrality CENNZ</p>
               <h3 className={classes.cardTitle}>
-                {balance[0]} <small>CENNZ</small> 
+                {balance.CENNZ} <small>CENNZ</small>
               </h3>
             </CardHeader>
           </Card>
         </GridItem>
+
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="warning" stats icon>
-              <CardIcon color="ro">
-                <img src="https://cryptologos.cc/logos/centrality-cennz-logo.svg?v=010" />
+            <CardHeader color="dark" stats icon>
+              <CardIcon color="dark">
+                <Icon>content_copy</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Centrality CPAY</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>
+                {balance.CPAY} <small>CPAY</small>
+              </h3>
             </CardHeader>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
-        </GridItem>
-        <GridItem xs={12} sm={6} md={3}>
-        </GridItem>
+      
       </GridContainer>
+      
       <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-        </GridItem>
-      </GridContainer>
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={6}>
+        <GridItem xs={12} sm={12} md={12} >
           <CustomTabs
-            title="Tasks:"
+            title="Entities:"
             headerColor="dark"
             tabs={[
               {
-                tabName: "Bugs",
+                tabName: "Delegators",
                 tabIcon: BugReport,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={bugs}
+                    tasksIndexes={[0, 1, 2, 3, 4, 5, 6, 7]}
+                    tasks={delegatorAddr}
                   />
                 ),
               },
-              {
-                tabName: "Website",
-                tabIcon: Code,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={website}
-                  />
-                ),
-              },
-              {
-                tabName: "Server",
-                tabIcon: Cloud,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={server}
-                  />
-                ),
-              },
+
             ]}
           />
         </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
-              <p className={classes.cardCategoryWhite}>
-                New employees on 15th September, 2016
-              </p>
-            </CardHeader>
-            <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={["ID", "Name", "Salary", "Country"]}
-                tableData={[
-                  ["1", "Dakota Rice", "$36,738", "Niger"],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"],
-                ]}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
+
+        
       </GridContainer>
     </div>
   );

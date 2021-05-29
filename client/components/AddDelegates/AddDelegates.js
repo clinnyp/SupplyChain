@@ -1,9 +1,22 @@
 import React from 'react'
 
-function AddDelegate() {
+import styles from './AddDelegates.css'
+import { Button } from '@material-ui/core';
+
+function AddDelegate(props) {
   return (
-    <div>
-      <p>test</p>
+    <div className='blocks'>        
+        <form>
+        <p>Salsbury Farm outtanowea</p>
+        <input
+          type="text"
+        />
+         <p>this is your address</p>
+        <input
+          type="text"
+        />
+        <button className='button'>Submit</button>
+      </form>
     </div>
   )
 }

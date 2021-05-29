@@ -5,10 +5,10 @@ function getBalances () {
 axios.get('http://localhost:7000/admin/balance')
   .then(res =>  {
     console.log('Testing!!!!!')
-    let balances = {
-      CENNZ = res.data.CENNZ,
-      CPAY = res.data.CPAY
-    }
+    // let balances = {
+    //   CENNZ = res.data.CENNZ,
+    //   CPAY = res.data.CPAY
+    // }
     return balances
   })
   .catch(function (error) {
