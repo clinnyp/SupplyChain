@@ -94,7 +94,7 @@ function Dashboard() {
                   <Tasks
                     checkedIndexes={[0, 3]}
                     tasksIndexes={[0, 1, 2, 3, 4, 5, 6, 7]}
-                    tasks={delegatorAddr}
+                    tasks={[]}
                   />
                 ),
               },
