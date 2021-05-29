@@ -48,8 +48,8 @@ function Dashboard() {
 
   return (
     <div>
+      
       <GridContainer>
-
         <GridItem xs={12} sm={6} md={3}>
           <Card>
             <CardHeader color="dark" stats icon>
@@ -78,33 +78,9 @@ function Dashboard() {
             </CardHeader>
           </Card>
         </GridItem>
-      
       </GridContainer>
       
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12} >
-          <CustomTabs
-            title="Entities:"
-            headerColor="dark"
-            tabs={[
-              {
-                tabName: "Delegators",
-                tabIcon: BugReport,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3, 4, 5, 6, 7]}
-                    tasks={delegatorAddr}
-                  />
-                ),
-              },
-
-            ]}
-          />
-        </GridItem>
-
-        
-      </GridContainer>
+      
     </div>
   );
 }

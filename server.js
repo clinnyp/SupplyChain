@@ -8,6 +8,11 @@ const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
 const FONTERRA = '5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2';
 const CENNZ = 16000;
 
+//Fonterra Account
+const FONTERRA_PATH = './accounts/5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2.json'
+const PASSWORD = 'fonterra123'
+
+
 let delegators = [
     [0, "farmer0", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
     [1, "farmer1", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
@@ -30,7 +35,7 @@ let delegatorAddresses = [
     "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
 ]
 
-async function _initialize(api) {
+async function _initialize(api, tokenId) {
     let data = {}
     data.stakingAssetId = await api.query.genericAsset.stakingAssetId(); // 1 on MainNet
     data.spendingAssetId = await api.query.genericAsset.spendingAssetId(); // 2 on MainNet
@@ -43,6 +48,25 @@ async function _initialize(api) {
     data.timestamp = Date.now();
 
     return data;
+}
+
+async function _burn(api) {
+    let delegator = await createKeypair(FONTERRA_PATH, PASSWORD);
+    let hasBurned = await api.tx.nft.burn(tokenId)
+        .signAndSend(delegator, async ({ status, events }) => {
+            return new Promise((resolve, reject) => {
+                if (status.isInBlock) {
+                    events.forEach(({ phase, event: { data, method, section } }) => {
+                        console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
+                    });
+                    console.log(`txID: ${status.asInBlock.toString()}`);
+                    resolve();
+                }
+                reject();
+            })
+
+        });
+    return hasBurned;
 }
 
 async function main() {
@@ -61,6 +85,10 @@ async function main() {
 
     app.get('/admin/delegators', async (req, res) => {
         res.send(delegators);
+    })
+
+    app.post('', (req, res) => {
+
     })
 
     const PORT = 7000 || process.env.PORT;
