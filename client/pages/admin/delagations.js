@@ -59,7 +59,7 @@ function DelagationsPage() {
   const classes = useStyles();
   return (
     <Card>
-      <CardHeader color="primary">
+      <CardHeader color="dark">
         <h4 className={classes.cardTitleWhite}>Your delegations</h4>
       </CardHeader>
       <CardBody>
