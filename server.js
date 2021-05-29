@@ -9,6 +9,7 @@ const CENNZ = 16000;
 
 //Fonterra Account
 const FONTERRA_PATH = './accounts/5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2.json'
+const FONTERRA = '5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2'
 const PASSWORD = 'fonterra123'
 
 
