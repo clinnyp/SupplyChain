@@ -8,18 +8,37 @@ module.exports = {
 
     /**
      * 
-     * @param {*} farmer_address 
-     * @param {*} keypairPath 
-     * @param {*} password 
+     * @param {Api} api 
+     * @param {String} userAddress 
+     * @description Delegate authority(doughnuts) to mint an NFT to a user address. 
+     * Workaround: Since doughtnuts don't work, mint an NFT that stores the user address set ownership to delgator.
+     * For Delegator to "revoke" authority, simply delete the representative NFT.
      */
-    delegatePermission: async (farmer_address, keypairPath, password) => {
-        let myKeyPair = await createKeypair(keypairPath, password);
-        let api = await Api.create({ provider: "wss://nikau.centrality.me/public/ws" });
-        console.log(`Connecting to CENNZnet...`);
+    delegatePermission: async (api, delegator, userAddress) => {
+        const delegatorCollection = 75;
+        console.log(`Delegating address ${userAddress} in collection ${delegatorCollection}`)
+        const attributes = [
+            {
+                "Text": userAddress
+            },
+            {
+                "Timestamp": Date.now()
+            }
+        ];
 
-        let txHash = await api.tx.genericAsset
-            .transfer(16001, farmer_address, 10000)
-            .signAndSend(myKeyPair);
+        //Placeholder doughnut 
+        const tokenExtrinsic = api.tx.nft.mintUnique(delegatorCollection, delegator.address, attributes, null, null);
+
+        tokenExtrinsic.signAndSend(delegator, ({ status }) => {
+            if (status.isInBlock) {
+                const txId = status.asInBlock.toString();
+                console.log(`Completed at block hash #${txId}`);
+                return Promise.resolve(txId);
+            }
+        }).catch((error) => {
+            console.log(':( transaction failed', error);
+            return Promise.reject(error);
+        });
     },
 
     createCollection: async (collectionId) => {
@@ -69,13 +88,14 @@ module.exports = {
      * @param {Array} tokenId 
      */
     burn: async (api, delegator, tokenId) => {
+        console.log(`Revoking ${tokenOwner} from delegators`)
         api.tx.nft.burn(tokenId)
             .signAndSend(delegator, async ({ status, events }) => {
                 if (status.isInBlock) {
                     events.forEach(({ phase, event: { data, method, section } }) => {
                         console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
                     });
-                    console.log(`txID: ${status.asInBlock.toString()}`);
+                    console.log(`Completed at block hash #${txId}`);
                 }
             });
     }

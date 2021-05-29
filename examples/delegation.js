@@ -10,9 +10,9 @@ async function main() {
     let fonterra = await createKeypair('./accounts/5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2.json', 'fonterra123');
     let api = await Api.create({ provider: NIKAU_WS });
     console.log(`Connecting to CENNZnet...`);
-
-    const milk_collectionId = 74; //Delegator collection id = 75
-    await util.mintNew(api, fonterra, addr.PETER, milk_collectionId, addr.PETER);
+    
+    console.log("Workaround delegation")
+    await util.delegatePermission(api, fonterra, addr.EZRA);
 }
 
 main().then(() => { }).catch((err) => {
