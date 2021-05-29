@@ -1,18 +1,11 @@
+const fs = require('fs')
+
 module.exports = async (user_address) => {
     const address = user_address;
-    const fs = require('fs');
-    const map = fs.readFile('C:/Users/peter/Documents/NFThackathon/hackathon-setup/util/config.json', 'utf8', function(err, return_data){
-        var obj = JSON.parse(return_data);
-        var fileName = obj[address];
-        var path = 'C:/Users/peter/Documents/NFThackathon/hackathon-setup/util/'
-        var dataSource = path.concat(fileName);
-        const test = fileName;
-        return fs.readFile(dataSource, 'utf8', function(err, iot_data){
-            return new Promise((resolve, reject) => {
-            // Display the file content
-            console.log("reading data file: " + iot_data);
-            resolve(iot_data);
-            })
-        }); 
-    })
+    const path = __dirname + '\\json\\config.json';
+    const map = JSON.parse(await fs.readFileSync(path, 'utf8'));
+    const fileName = map[address].metadata_file;
+    const datasource = __dirname + '\\json\\' + fileName;
+    const data = JSON.parse(await fs.readFileSync(datasource, 'utf8')); //Refactor: readstream?
+    return Promise.resolve(data);
 }

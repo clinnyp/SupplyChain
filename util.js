@@ -1,67 +1,86 @@
-const fs = require('fs');
 const { Api } = require('@cennznet/api');
-const { Keyring, KeyringPair } = require('@polkadot/keyring');
-const { exit } = require('process');
 const createKeypair = require('./util/createKeypair');
-// A websocket address for some CENNZnet full nodes
 const NIKAU_WS = 'wss://nikau.centrality.me/public/ws';
-const keyPair = require('./accounts/easyRun.js');
-const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
-const ALICE = '5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY';
-const BOB = '5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty';
-const EZRA = '5DsqHecULBv5F8ELf8BpHcGEYPbZt3B6MFqyUm8RUq5b1Huu'
-// Asset Id for CENNZ in Nikau
+
 const CENNZ = 16000;
 
-module.exports.delegatePermission = async(farmer_address, keypairPath, password) => {
-    // Setup a keyring to sign messages
-    let myKeyPair = await createKeypair(keypairPath, password);
-    // Connect to Nikau network full nodes
-    let api = await Api.create({ provider: "wss://nikau.centrality.me/public/ws" });
-    console.log(`Connecting to CENNZnet...`);
-    // Say hello, signing the message without keypair
-    console.log(`Saying hello...\n\n`);
-    let txHash = await api.tx.genericAsset
-    .transfer(16001, farmer_address, 10000)
-    .signAndSend(myKeyPair);
-    }
+module.exports = {
 
-module.exports.mintNew = async(user_address) => {
-    const ds = require('./util/dataSource.js');
-    // Setup a keyring to sign messages
-    let delegator = await keyPair;
-    let api = await Api.create({ provider: NIKAU_WS });
-    console.log(`Connecting to CENNZnet...`);
-    const collectionId = 29;
-    const tokenOwner = PETER;
-    const data = await ds(user_address);
-    console.log(`data retrieved`);
-    const data_as_string = data;
-    const attributes = [
+    /**
+     * 
+     * @param {*} farmer_address 
+     * @param {*} keypairPath 
+     * @param {*} password 
+     */
+    delegatePermission: async (farmer_address, keypairPath, password) => {
+        let myKeyPair = await createKeypair(keypairPath, password);
+        let api = await Api.create({ provider: "wss://nikau.centrality.me/public/ws" });
+        console.log(`Connecting to CENNZnet...`);
+
+        let txHash = await api.tx.genericAsset
+            .transfer(16001, farmer_address, 10000)
+            .signAndSend(myKeyPair);
+    },
+
+    createCollection: async (collectionId) => {
+        throw new Error('Out of scope')
+    },
+
+    /**
+     * 
+     * @param {Api} api - Api Object 
+     * @param {KeyringPair} delegator - Delegator Keypair
+     * @param {String} address - User address
+     * @param {Number} collectionId - Colletion Id for tokens
+     * @param {String} tokenOwner - Token Owner address
+     * @description creates new nft containing metadata from 'address' param. Mints on behalf of delgator and sends to tokenOwner
+     */
+    mintNew: async (api, delegator, address, collectionId, tokenOwner) => {
+        const ds = require('./util/dataSource.js');
+        const data = await ds(address);
+        const data_as_string = JSON.stringify(data);
+
+        const attributes = [
             {
-            "Text" : data_as_string
+                "Text": data_as_string
             },
             {
-            "Text" : "test"
-            },
-            {
-                "Text" : "test2"
-            },
-            {
-                "Text" : "test3"
+                "Timestamp": Date.now()
             }
-    ];
-    const tokenExtrinsic = api.tx.nft.mintUnique(collectionId, tokenOwner, attributes, null, null);
-    let payload = {}; 
-    tokenExtrinsic.signAndSend(delegator, payload, ({ status }) => {
-        if (status.isInBlock) {
-            console.log(`Completed at block hash #${status.asInBlock.toString()}`);
-        }
-    }).catch((error) => {
-        console.log(':( transaction failed', error);
-    });
-    return [tokenExtrinsic];
+        ];
+        const tokenExtrinsic = api.tx.nft.mintUnique(collectionId, tokenOwner, attributes, null, null);
+
+        tokenExtrinsic.signAndSend(delegator, ({ status }) => {
+            if (status.isInBlock) {
+                const txId = status.asInBlock.toString();
+                console.log(`Completed at block hash #${txId}`);
+                return Promise.resolve(txId);
+            }
+        }).catch((error) => {
+            console.log(':( transaction failed', error);
+            return Promise.reject(error);
+        });
+    },
+
+    /**
+     * 
+     * @param {Api} api 
+     * @param {KeyringPair} delegator 
+     * @param {Array} tokenId 
+     */
+    burn: async (api, delegator, tokenId) => {
+        api.tx.nft.burn(tokenId)
+            .signAndSend(delegator, async ({ status, events }) => {
+                if (status.isInBlock) {
+                    events.forEach(({ phase, event: { data, method, section } }) => {
+                        console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
+                    });
+                    console.log(`txID: ${status.asInBlock.toString()}`);
+                }
+            });
+    }
 }
+
 
 
 
