@@ -1,7 +1,7 @@
 .blocks {
   display: inline-block;
   padding: 20px;
-  border: 1.5px solid #0B87FB; 
+  border: 2px solid #222527; 
   margin-right: 15px;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -9,6 +9,11 @@
   height: 300px;
   text-align: justify;
   margin-bottom: 15px;
+  min-width: 375px;
+}
+
+.blocks:hover {
+  border: 2px solid #7599a5; 
 }
 
 .button {
@@ -23,6 +28,19 @@
   display: block;
   margin-top: 15px
 
+}
+
+.button:hover {
+  background-color: #7599a5; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  display: block;
+  margin-top: 15px
 }
 
 p {

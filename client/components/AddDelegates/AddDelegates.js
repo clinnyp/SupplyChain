@@ -7,11 +7,11 @@ function AddDelegate(props) {
   return (
     <div className='blocks'>        
         <form>
-        <p>Enter name of the co-operative farm</p>
+        <p>Salsbury Farm outtanowea</p>
         <input
           type="text"
         />
-         <p>Enter Wallet Address:</p>
+         <p>this is your address</p>
         <input
           type="text"
         />
