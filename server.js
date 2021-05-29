@@ -2,7 +2,6 @@ const { Api } = require('@cennznet/api');
 const express = require('express')
 var cors = require('cors')
 const app = express();
-const getBalance = require('./util/getBalance')
 
 const NIKAU_WS = 'wss://nikau.centrality.me/public/ws';
 const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
