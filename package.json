@@ -24,10 +24,7 @@
     "@cennznet/cennznut": "github:cennznet/cennznut.js",
     "@plugnet/doughnut-maker": "github:cennznet/doughnut-maker",
     "@plugnet/keyring": "^1.1.100",
-<<<<<<< HEAD
-=======
     "@plugnet/wasm-crypto-js": "^0.11.102",
->>>>>>> 11419f92e74c57503d57245cc23748d3c56f0f83
     "@polkadot/ui-keyring": "0.62.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
