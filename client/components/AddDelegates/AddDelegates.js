@@ -1,6 +1,7 @@
 import React from 'react'
 
 import styles from './AddDelegates.css'
+import { Button } from '@material-ui/core';
 
 function AddDelegate(props) {
   return (
@@ -10,11 +11,11 @@ function AddDelegate(props) {
         <input
           type="text"
         />
-         <p>Enter Wallet Address</p>
+         <p>Enter Wallet Address:</p>
         <input
           type="text"
         />
-        <button className='submitting'>Submit</button>
+        <button className='button'>Submit</button>
       </form>
     </div>
   )
