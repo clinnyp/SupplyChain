@@ -38,21 +38,14 @@ import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js
 import getBalances from '../../util/getBalances.js'
 
 
-
-
-
 function Dashboard() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
 
-  const [balance, setBalance] = useState([0,0])
-  const {CENNZ, CPAY} = getBalances
+  const [balance, setBalance] = useState(0)
 
-  useEffect(() => {
-    [CENNZ, CPAY] = getBalances
-    setBalance[0] = CENNZ
-    setBalance[1] = CPAY
-  })
+
+  
 
   return (
     <div>
@@ -65,7 +58,7 @@ function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Centrality CENNZ</p>
               <h3 className={classes.cardTitle}>
-                {balance[0]} <small>CENNZ</small> 
+                {balance} <small>CENNZ</small> 
               </h3>
             </CardHeader>
           </Card>

@@ -65,9 +65,6 @@ function DelagationsPage() {
         <AddDelagates />
         <AddDelagates />
         <AddDelagates />
-        <AddDelagates />
-        <AddDelagates />
-        <AddDelagates />
       </CardBody>
     </Card>
   );

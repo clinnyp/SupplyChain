@@ -1,9 +1,21 @@
 import React from 'react'
 
-function AddDelegate() {
+import styles from './AddDelegates.css'
+
+function AddDelegate(props) {
   return (
-    <div>
-      <p>test</p>
+    <div className='blocks'>        
+        <form>
+        <p>Enter name of the co-operative farm</p>
+        <input
+          type="text"
+        />
+         <p>Enter Wallet Address</p>
+        <input
+          type="text"
+        />
+        <button className='submitting'>Submit</button>
+      </form>
     </div>
   )
 }
