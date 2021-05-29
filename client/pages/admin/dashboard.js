@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
 // @material-ui/core
@@ -32,20 +32,26 @@ import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 
 import { bugs, website, server } from "variables/general.js";
-
-
 import styles from "assets/jss/nextjs-material-dashboard/views/dashboardStyle.js";
-import getBalances from '../../util/getBalances.js'
-
+import axios from "axios";
 
 function Dashboard() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+  const [data, setData] = useState({});
+  const [balance, setBalance] = useState({ "CENNZ": 0, "CPAY": 0 })
 
-  const [balance, setBalance] = useState(0)
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        'http://localhost:7000/',
+      );
+      setData(result.data);
+      setBalance({ "CENNZ": result.data.CENNZ, "CPAY": result.data.CPAY });
+    };
 
-
-  
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -58,22 +64,26 @@ function Dashboard() {
               </CardIcon>
               <p className={classes.cardCategory}>Centrality CENNZ</p>
               <h3 className={classes.cardTitle}>
-                {balance} <small>CENNZ</small> 
+                {balance.CENNZ} <small>CENNZ</small>
               </h3>
             </CardHeader>
           </Card>
         </GridItem>
+
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <CardHeader color="warning" stats icon>
-              <CardIcon color="ro">
-                <img src="https://cryptologos.cc/logos/centrality-cennz-logo.svg?v=010" />
+            <CardHeader color="dark" stats icon>
+              <CardIcon color="dark">
+                <Icon>content_copy</Icon>
               </CardIcon>
               <p className={classes.cardCategory}>Centrality CPAY</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>
+                {balance.CPAY} <small>CPAY</small>
+              </h3>
             </CardHeader>
           </Card>
         </GridItem>
+
         <GridItem xs={12} sm={6} md={3}>
         </GridItem>
         <GridItem xs={12} sm={6} md={3}>
