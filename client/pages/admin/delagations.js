@@ -15,6 +15,7 @@ import Danger from "components/Typography/Danger.js";
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
+import NewDelegateSign from "../../components/AddDelegates/newDelegateSign"
 
 const styles = {
   typo: {
@@ -58,7 +59,7 @@ function DelagationsPage() {
   const classes = useStyles();
   return (
     <Card>
-      <CardHeader color="primary">
+      <CardHeader color="dark">
         <h4 className={classes.cardTitleWhite}>Your delegations</h4>
       </CardHeader>
       <CardBody>

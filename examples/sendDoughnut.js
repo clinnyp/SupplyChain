@@ -2,9 +2,10 @@ const doughnutMaker = require('@plugnet/doughnut-maker');
 const cennznut = require('@cennznet/cennznut');
 const cennznet = require('@cennznet/api');
 //const Keyring = require('@plugnet/keyring');
-const testingPairs = require('@plugnet/keyring/testingPairs');
-const util = require('@plugnet/util');
+//const testingPairs = require('@plugnet/keyring/testingPairs');
+//const util = require('@plugnet/util');
 const _wasmCrypto = require("@plugnet/wasm-crypto");
+const Ezra_address = "5DsqHecULBv5F8ELf8BpHcGEYPbZt3B6MFqyUm8RUq5b1Huu";
 
 /// Helper for creating CENNZnuts
 function makeCennznut(module, method) {
@@ -42,23 +43,17 @@ async function makeDoughnut(
 async function main() {
     await (0, _wasmCrypto.waitReady)();
     const api = await cennznet.Api.create({provider: 'wss://nikau.centrality.me/public/ws'});
-    keyring = testingPairs.default({ type: 'sr25519' });
-
-    let aliceKeyPair = {
-      secretKey: util.hexToU8a('0x98319d4ff8a9508c4bb0cf0b5a78d760a0b2082c02775e6e82370816fedfff48925a225d97aa00682d6a59b95b18780c10d7032336e88f3442b42361f4a66011'),
-      publicKey: util.hexToU8a('0xd43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d')
-    };
 
     let doughnut = await makeDoughnut(
-      aliceKeyPair,
-      keyring.bob,
+      Ezra_address,
+      "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
       { "cennznet": makeCennznut("generic-asset", "transfer") }
     );
     const options = { doughnut: doughnut.encode() };
 
     const txHash = await api.tx.genericAsset
-    .transfer(16001, keyring.charlie.address, 10000)
-    .signAndSend(keyring.bob, options);
-    }
+    .transfer(16001, "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn", 10000)
+    .signAndSend(Ezra_address, options);
+}
 
 main().catch(console.error).finally(() => process.exit());

@@ -1,11 +1,10 @@
 const { Api } = require('@cennznet/api');
 const express = require('express')
-const cors = require('cors');
+var cors = require('cors')
 const app = express();
 
 const NIKAU_WS = 'wss://nikau.centrality.me/public/ws';
 const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
-const FONTERRA = '5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2';
 const CENNZ = 16000;
 
 //Fonterra Account
@@ -24,16 +23,10 @@ let delegators = [
     [7, "farmer7", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
 ]
 
-let delegatorAddresses = [
-    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
-    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
-    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
-    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
-    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
-    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
-    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
-    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
-]
+app.get('/', function (req, res) {
+    let test = { "data": "this is a test object", "array": [0, 1, 2] }
+    res.send(test)
+})
 
 async function _initialize(api, tokenId) {
     let data = {}
@@ -103,3 +96,7 @@ main().then(() => { }).catch((err) => {
 });
 
 
+const PORT = 7000 || process.env.PORT;
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT}`)
+})
