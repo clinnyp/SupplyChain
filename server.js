@@ -27,7 +27,7 @@ async function main() {
 
     app.use(cors());
 
-    app.get('/', function (req, res) {
+    app.get('/', async function (req, res) {
         res.send(await _initialize(api))
     })
 
