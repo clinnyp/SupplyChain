@@ -3,6 +3,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // layout for this page
 import Admin from "layouts/Admin.js";
+import AddDelagates from '../../components/AddDelegates/AddDelegates'
 // core components
 import Quote from "components/Typography/Quote.js";
 import Muted from "components/Typography/Muted.js";
@@ -61,6 +62,12 @@ function DelagationsPage() {
         <h4 className={classes.cardTitleWhite}>Your delegations</h4>
       </CardHeader>
       <CardBody>
+        <AddDelagates />
+        <AddDelagates />
+        <AddDelagates />
+        <AddDelagates />
+        <AddDelagates />
+        <AddDelagates />
       </CardBody>
     </Card>
   );
