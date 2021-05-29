@@ -8,6 +8,28 @@ const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
 const FONTERRA = '5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2';
 const CENNZ = 16000;
 
+let delegators = [
+    [0, "farmer0", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
+    [1, "farmer1", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
+    [2, "farmer2", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
+    [3, "farmer3", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
+    [4, "farmer4", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
+    [5, "farmer5", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
+    [6, "farmer6", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
+    [7, "farmer7", "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn"],
+]
+
+let delegatorAddresses = [
+    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
+    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
+    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
+    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
+    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
+    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
+    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
+    "5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn",
+]
+
 async function _initialize(api) {
     let data = {}
     data.stakingAssetId = await api.query.genericAsset.stakingAssetId(); // 1 on MainNet
@@ -16,6 +38,8 @@ async function _initialize(api) {
     data.CPAY = await api.query.genericAsset.freeBalance(16001, FONTERRA);
     data.locks = await api.query.genericAsset.locks(FONTERRA);
     data.asset = await api.rpc.genericAsset.registeredAssets();
+    data.delegators = delegators;
+    data.delegatorAddresses = delegatorAddresses;
     data.timestamp = Date.now();
 
     return data;
@@ -33,6 +57,10 @@ async function main() {
 
     app.get('/admin/balance', async (req, res) => {
         res.send(await _initialize(api));
+    })
+
+    app.get('/admin/delegators', async (req, res) => {
+        res.send(delegators);
     })
 
     const PORT = 7000 || process.env.PORT;
