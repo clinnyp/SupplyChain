@@ -29,7 +29,7 @@ module.exports = {
         //Placeholder doughnut 
         const tokenExtrinsic = api.tx.nft.mintUnique(delegatorCollection, delegator.address, attributes, null, null);
 
-        tokenExtrinsic.signAndSend(delegator, ({ status }) => {
+        tokenExtrinsic.signAndSend(delegator, ({ status, events }) => {
             if (status.isInBlock) {
                 const txId = status.asInBlock.toString();
                 events.forEach(({ phase, event: { data, method, section } }) => {
@@ -40,6 +40,27 @@ module.exports = {
         }).catch((error) => {
             console.log(':( transaction failed', error);
         });
+    },
+
+    getDelegates: async (api, collectionId) => {
+        let collectionName = new TextDecoder().decode(await api.query.nft.collectionName(collectionId));
+        console.log(collectionName);
+
+        let delegates = (await api.derive.nft.tokenInfoForCollection(collectionId));
+
+        let list = [];
+
+        for (let i = 0; i < delegates.length; i++) {
+            const cId = parseInt(delegates[i].tokenId.get('collectionId'));
+            const sId = parseInt(delegates[i].tokenId.get('seriesId'));
+            const sN = parseInt(delegates[i].tokenId.get('serialNumber'));
+            const delegate = (await api.derive.nft.tokenInfo([cId, sId, sN]));
+
+            list.push(delegate);
+        }
+
+        return list;
+
     },
 
     createCollection: async (collectionId) => {

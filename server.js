@@ -2,6 +2,7 @@ const { Api } = require('@cennznet/api');
 const express = require('express')
 var cors = require('cors')
 const app = express();
+const util = require('./util')
 
 const NIKAU_WS = 'wss://nikau.centrality.me/public/ws';
 const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
@@ -53,10 +54,11 @@ async function main() {
     })
 
     app.get('/admin/delegators', async (req, res) => {
+        const delegators = await util.getDelegates(api, 75);
         res.send(delegators);
     })
 
-    
+
     app.post('', (req, res) => {
 
     })

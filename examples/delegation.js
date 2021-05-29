@@ -13,6 +13,7 @@ async function main() {
     
     console.log("Workaround delegation")
     await util.delegatePermission(api, fonterra, addr.EZRA);
+    
 }
 
 main().then(() => { }).catch((err) => {

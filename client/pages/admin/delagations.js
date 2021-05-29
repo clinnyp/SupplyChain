@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // layout for this page
@@ -25,7 +25,7 @@ import Table from "components/Table/Table.js";
 import Tasks from "components/Tasks/Tasks.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import CardIcon from "components/Card/CardIcon.js";
-
+import axios from "axios";
 
 const styles = {
   typo: {
@@ -67,43 +67,80 @@ const styles = {
 function DelagationsPage() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+  const [delegates, setDelegates] = useState([]);
+  const [delegateIx, setIx] = useState([0])
+  
+  function handleData(data) {
+    let delegates = [];
+    for (let i = 0; i < data.length; i++) {
+      delegates.push([i, data[i].attributes[0].Text, data[i].attributes[0].Timestamp])
+    }
+    console.log(delegates)
+    return delegates;
+  }
+
+  function handleIx(data) {
+    let ix = [];
+    for (let i = 0; i < data.length; i++) {
+      ix.push(i);
+    }
+    return ix;
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        'http://localhost:7000/admin/delegators',
+      );
+
+      console.log(result.data);
+      let d = await handleData(result.data);
+      let ix = await handleIx(result.data);
+      setDelegates(d);
+      setIx(ix);
+
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Card>
       <CardHeader color="dark">
         <h4 className={classes.cardTitleWhite}>Your delegations</h4>
       </CardHeader>
       <CardBody>
-      <div>
-      
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12} >
-          <CustomTabs
-            title="Entities:"
-            headerColor="dark"
-            tabs={[
-              {
-                tabName: "Delegators",
-                tabIcon: BugReport,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3, 4, 5, 6, 7]}
-                    tasks={[]}
-                  />
-                ),
-              },
-              {
-                tabName: "Add a delegate",
-                tabIcon: BugReport,
-              }
+        <div>
 
-            ]}
-          />
-        </GridItem>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={12} >
+              <CustomTabs
+                title="Entities:"
+                headerColor="dark"
+                tabs={[
+                  {
+                    tabName: "Delegators",
+                    tabIcon: BugReport,
+                    tabContent: (
+                      <Tasks
+                        checkedIndexes={[]}
+                        tasksIndexes={delegateIx}
+                        tasks={delegates}
+                      />
+                    ),
+                  },
+                  {
+                    tabName: "Add a delegate",
+                    tabIcon: BugReport,
+                  }
 
-        
-      </GridContainer>
-    </div>
+                ]}
+              />
+            </GridItem>
+
+
+          </GridContainer>
+        </div>
       </CardBody>
     </Card>
   );
