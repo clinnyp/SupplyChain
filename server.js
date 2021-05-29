@@ -1,5 +1,6 @@
 const { Api } = require('@cennznet/api');
 const express = require('express')
+var cors = require('cors')
 const app = express();
 const getBalance = require('./util/getBalance')
 
@@ -7,7 +8,7 @@ const NIKAU_WS = 'wss://nikau.centrality.me/public/ws';
 const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
 const CENNZ = 16000;
 
-
+app.use(cors())
 
 app.get('/', function (req, res) {
     let test = { "data": "this is a test object", "array": [0, 1, 2] }
