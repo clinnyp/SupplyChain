@@ -1,8 +1,10 @@
 const { Api } = require('@cennznet/api');
 const express = require('express')
-var cors = require('cors')
+const cors = require('cors')
 const app = express();
+const bodyParser = require('body-parser');
 const util = require('./util')
+const createKeypair = require('./util/createKeypair')
 
 const NIKAU_WS = 'wss://nikau.centrality.me/public/ws';
 const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
@@ -41,9 +43,13 @@ async function _initialize(api, tokenId) {
 
 async function main() {
     const api = await Api.create({ provider: NIKAU_WS });
+    const fonterra = await createKeypair('./accounts/5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2.json', 'fonterra123');
+
     const init_data = await _initialize(api);
 
     app.use(cors());
+    app.use(bodyParser.urlencoded());
+    app.use(bodyParser.json());
 
     app.get('/', async function (req, res) {
         res.send(await _initialize(api))
@@ -58,9 +64,26 @@ async function main() {
         res.send(delegators);
     })
 
+    app.post('/addDelegate', (req, res) => {
+        const address = req.body.address;
+        util.delegatePermission(api, fonterra, address);
+    })
 
-    app.post('', (req, res) => {
-
+    app.post('/revokeDelegate', async (req, res) => {
+        const address = req.body.address;
+        const delegators = await util.getDelegates(api, 75);
+        let tokenId;
+        for (let i = 0; i < delegators.length; i++) {
+            const c = delegators[i];
+            if (c.attributes[0].Text == address) {
+                const cId = parseInt(c[i].tokenId.get('collectionId'));
+                const sId = parseInt(c[i].tokenId.get('seriesId'));
+                const sN = parseInt(c[i].tokenId.get('serialNumber'));
+                tokenId = [cId, sId, sN];
+            }
+        }
+        if (tokenId.length > 0)
+            await util.revoke(api, fonterra, address);
     })
 
     const PORT = 7000 || process.env.PORT;

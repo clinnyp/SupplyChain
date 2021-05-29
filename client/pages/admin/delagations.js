@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // layout for this page
@@ -16,9 +16,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import Icon from "@material-ui/core/Icon";
 import BugReport from "@material-ui/icons/BugReport";
-
-
-// core components
+import TextField from '@material-ui/core/TextField';// core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Table from "components/Table/Table.js";
@@ -26,6 +24,7 @@ import Tasks from "components/Tasks/Tasks.js";
 import CustomTabs from "components/CustomTabs/CustomTabs.js";
 import CardIcon from "components/Card/CardIcon.js";
 import axios from "axios";
+import { Button } from "@material-ui/core";
 
 const styles = {
   typo: {
@@ -69,7 +68,9 @@ function DelagationsPage() {
   const classes = useStyles();
   const [delegates, setDelegates] = useState([]);
   const [delegateIx, setIx] = useState([0])
-  
+  const valueRef = useRef('')
+  const revokeRef = useRef('')
+
   function handleData(data) {
     let delegates = [];
     for (let i = 0; i < data.length; i++) {
@@ -85,6 +86,36 @@ function DelagationsPage() {
       ix.push(i);
     }
     return ix;
+  }
+
+  const addDelegate = () => {
+    axios({
+      method: 'post',
+      url:'http://localhost:7000/addDelegate', 
+      data:{
+      address: valueRef.current.value,
+    }})
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  const revokeDelegate = () => {
+    axios({
+      method: 'post',
+      url:'http://localhost:7000/revokeDelegate', 
+      data:{
+      address: revokeRef.current.value,
+    }})
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
@@ -132,6 +163,28 @@ function DelagationsPage() {
                   {
                     tabName: "Add a delegate",
                     tabIcon: BugReport,
+                    tabContent: (
+                      <form className={classes.root} noValidate autoComplete="off">
+                        <TextField
+                          id="standard-full-width"
+                          label="Address"
+                          style={{ margin: 8 }}
+                          placeholder="5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
+                          helperText="Add delegator address"
+                          fullWidth
+                          margin="normal"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          inputRef={valueRef}
+                        />
+                        <Button
+                          variant="contained"
+                          onClick={addDelegate}
+                        >
+                          Add delegator</Button>
+                      </form>
+                    )
                   }
 
                 ]}
