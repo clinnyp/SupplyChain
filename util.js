@@ -79,7 +79,9 @@ module.exports = {
     mintNew: async (api, delegator, address, collectionId, tokenOwner) => {
         const ds = require('./util/dataSource.js');
         const data = await ds(address);
-        const data_as_string = JSON.stringify(data);
+        var full = JSON.stringify(data);
+        const data_as_string = full.slice(0, 400);
+        console.log(full);
 
         const attributes = [
             {
@@ -91,7 +93,7 @@ module.exports = {
         ];
         const tokenExtrinsic = api.tx.nft.mintUnique(collectionId, tokenOwner, attributes, null, null);
 
-        tokenExtrinsic.signAndSend(delegator, ({ status }) => {
+        tokenExtrinsic.signAndSend(delegator, ({ status, events }) => {
             if (status.isInBlock) {
                 const txId = status.asInBlock.toString();
                 events.forEach(({ phase, event: { data, method, section } }) => {
