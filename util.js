@@ -111,7 +111,6 @@ module.exports = {
      * @param {Array} tokenId 
      */
     revoke: async (api, delegator, tokenId) => {
-        console.log(`Revoking ${tokenOwner} from delegators`)
         api.tx.nft.burn(tokenId)
             .signAndSend(delegator, async ({ status, events }) => {
                 if (status.isInBlock) {
