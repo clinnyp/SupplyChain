@@ -12,7 +12,7 @@ async function main() {
     console.log(`Connecting to CENNZnet...`);
 
     const milk_collectionId = 74; //Delegator collection id = 75
-    await util.mintNew(api, fonterra, addr.PETER, milk_collectionId, addr.PETER);
+    await util.mintNew(api, fonterra, addr.PETER, 74, addr.PETER);
 }
 
 main().then(() => { }).catch((err) => {

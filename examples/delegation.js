@@ -11,8 +11,9 @@ async function main() {
     let api = await Api.create({ provider: NIKAU_WS });
     console.log(`Connecting to CENNZnet...`);
     
-    console.log("Workaround delegation")
-    await util.delegatePermission(api, fonterra, addr.EZRA);
+    //console.log("Workaround delegation")
+    //await util.delegatePermission(api, fonterra, addr.ALICE);
+    await util.getDelegates(api, 75);
     
 }
 

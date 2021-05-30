@@ -33,14 +33,6 @@ const dashboardRoutes = [
     icon: Dashboard,
 
     layout: "/admin",
-  },
-  {
-    path: "/delagations",
-    name: "Delagations",
-    rtlName: "لوحة القيادة",
-    icon: Dashboard,
-
-    layout: "/admin",
   }
   // {
   //   path: "/user-profile",

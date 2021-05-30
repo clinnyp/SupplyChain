@@ -27,7 +27,8 @@
     "react": "17.0.1",
     "react-chartist": "0.14.3",
     "react-dom": "17.0.1",
-    "react-swipeable-views": "0.13.9"
+    "react-swipeable-views": "0.13.9",
+    "recharts": "^2.0.9"
   },
   "eslintConfig": {
     "extends": "react-app"

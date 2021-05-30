@@ -66,6 +66,7 @@ const styles = {
 function DelagationsPage() {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
+
   const [delegates, setDelegates] = useState([]);
   const [delegateIx, setIx] = useState([0])
   const valueRef = useRef('')
@@ -74,7 +75,7 @@ function DelagationsPage() {
   function handleData(data) {
     let delegates = [];
     for (let i = 0; i < data.length; i++) {
-      delegates.push([i, data[i].attributes[0].Text, data[i].attributes[0].Timestamp])
+      delegates.push([data[i].attributes[0].Text])
     }
     console.log(delegates)
     return delegates;
@@ -119,7 +120,7 @@ function DelagationsPage() {
   }
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDelegates = async () => {
       const result = await axios(
         'http://localhost:7000/admin/delegators',
       );
@@ -132,7 +133,7 @@ function DelagationsPage() {
 
     };
 
-    fetchData();
+    fetchDelegates();
   }, []);
 
   return (
@@ -161,7 +162,7 @@ function DelagationsPage() {
                     ),
                   },
                   {
-                    tabName: "Add a delegate",
+                    tabName: "Add a delegator",
                     tabIcon: BugReport,
                     tabContent: (
                       <form className={classes.root} noValidate autoComplete="off">
@@ -185,14 +186,40 @@ function DelagationsPage() {
                           Add delegator</Button>
                       </form>
                     )
+                  },
+                  {
+                    tabName: "Revoke a delegator",
+                    tabIcon: BugReport,
+                    tabContent: (
+                      <form className={classes.root} noValidate autoComplete="off">
+                        <TextField
+                          id="standard-full-width"
+                          label="Address"
+                          style={{ margin: 8 }}
+                          placeholder="5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
+                          helperText="Delegator address"
+                          fullWidth
+                          margin="normal"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          inputRef={revokeRef}
+                        />
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={revokeDelegate}
+                        >
+                          Revoke delegator</Button>
+                      </form>
+                    )
                   }
 
                 ]}
               />
             </GridItem>
-
-
           </GridContainer>
+          
         </div>
       </CardBody>
     </Card>

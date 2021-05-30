@@ -72,18 +72,19 @@ async function main() {
     app.post('/revokeDelegate', async (req, res) => {
         const address = req.body.address;
         const delegators = await util.getDelegates(api, 75);
-        let tokenId;
+        let tokenId = [];
         for (let i = 0; i < delegators.length; i++) {
             const c = delegators[i];
+            console.log(c)
             if (c.attributes[0].Text == address) {
-                const cId = parseInt(c[i].tokenId.get('collectionId'));
-                const sId = parseInt(c[i].tokenId.get('seriesId'));
-                const sN = parseInt(c[i].tokenId.get('serialNumber'));
+                const cId = parseInt(c.tokenId.get('collectionId'));
+                const sId = parseInt(c.tokenId.get('seriesId'));
+                const sN = parseInt(c.tokenId.get('serialNumber'));
                 tokenId = [cId, sId, sN];
             }
         }
         if (tokenId.length > 0)
-            await util.revoke(api, fonterra, address);
+            await util.revoke(api, fonterra, tokenId);
     })
 
     const PORT = 7000 || process.env.PORT;
