@@ -15,12 +15,11 @@ function createData(id, date, name, shipTo, paymentMethod, amount) {
 
 const rows = [
   createData(0, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ "country": "New Zealand", "city": "Auckland", "date": "29/05/2021" }',  1.5),
-  createData(1, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ ... }',  1.5),
-  createData(2, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ ... }',  1.5),
-  createData(3, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ ... }',  1.5),
-  createData(4, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ ... }',  1.5),
-  createData(5, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ ... }',  1.5),
-  
+  createData(1, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ "country": "New Zealand", "city": "Auckland", "date": "29/05/2021" }',  1.5),
+  createData(2, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ "country": "New Zealand", "city": "Auckland", "date": "29/05/2021" }',  1.5),
+  createData(3, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ "country": "New Zealand", "city": "Auckland", "date": "29/05/2021" }',  1.5),
+  createData(4, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ "country": "New Zealand", "city": "Auckland", "date": "29/05/2021" }',  1.5),
+  createData(5, '16 Mar, 2019', '0x937dec6ae52dd3fa2eb01cf84c28538ff4a88efedc131af29a53eed989d46159', '{ "country": "New Zealand", "city": "Auckland", "date": "29/05/2021" }',  1.5),
 ];
 
 function preventDefault(event) {

@@ -173,8 +173,8 @@ function Dashboard() {
                           id="standard-full-width"
                           label="Attribute"
                           style={{ margin: 8 }}
-                          placeholder="{}"
-                          helperText="Add NFT Attribute"
+                          placeholder="5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
+                          helperText="Add Delegator"
                           fullWidth
                           margin="normal"
                           InputLabelProps={{

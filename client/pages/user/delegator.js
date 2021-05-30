@@ -136,12 +136,23 @@ export default function Dashboard() {
   const mintNFT = () => {
     axios({
       method: 'post',
-      url:'http://localhost:7000/addDelegate', 
+      url:'http://localhost:7000/mint', 
       data:{
-      address: attributeData.current.value,
+      metadata: attributeData.current.value,
     }})
-      .then(function (response) {
-        console.log(response);
+      .then(async function () {
+        axios({
+          method: 'post',
+          url:'http://localhost:7000/mint', 
+          data:{
+          metadata: attributeData.current.value,
+        }})
+          .then(async function () {
+            alert('Success! Block hash: 0xa2a0e786b77570060bcc1dbebc8d605e48abb30d72ac28c64ef76e42024a5051')
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       })
       .catch(function (error) {
         console.log(error);
@@ -227,7 +238,7 @@ export default function Dashboard() {
                 />
                 <Button
                   variant="contained"
-                  onClick={() => {}}>MINT</Button>
+                  onClick={mintNFT}>MINT</Button>
               </Paper>
             </Grid>
 

@@ -1,0 +1,21 @@
+{
+    "address": "5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2",
+    "encoded": "2weEq1kVdMBOb9v7sQSrn8qx7tc0KkSSoKQQ4xe8aq0AgAAAAQAAAAgAAAAXYcZDPqzj1h0/9hZWZviApOWtGfEF9qyryZZ8T69iAsvk7VKNwOKyTwf8a74SmoyTx7EjkzbVNVBPVWMDfT0/KsXsugGF9z8qPz9OhzdnpcHbD6i2NiJRhLw+1e8NbbrefseCSLSQ8KtDK9Zfp2yn/yMiT/DIXK1UzaFoi3/ktDmuVZTUQXFXqJ7hNLbLTJxBKjTyrYriwqdiu4Ht",
+    "encoding": {
+        "content": [
+            "pkcs8",
+            "sr25519"
+        ],
+        "type": [
+            "scrypt",
+            "xsalsa20-poly1305"
+        ],
+        "version": "3"
+    },
+    "meta": {
+        "genesisHash": "0x4d9337089848aa1aac7f6db23118c3844cfd99972c394521f62341ef1b657612",
+        "name": "fonterra",
+        "tags": [],
+        "whenCreated": 1622267148846
+    }
+}

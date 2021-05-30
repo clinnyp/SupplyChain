@@ -11,7 +11,7 @@ const PETER = '5GWVMKzwKVhdUXAv9dgTUZ4XUxXXTixgFZHnvKHRfwK93Hdn';
 const CENNZ = 16000;
 
 //Fonterra Account
-const FONTERRA_PATH = './accounts/5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2.json'
+const FONTERRA_PATH = './util/5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2.json'
 const FONTERRA = '5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2'
 const PASSWORD = 'fonterra123'
 
@@ -43,7 +43,7 @@ async function _initialize(api, tokenId) {
 
 async function main() {
     const api = await Api.create({ provider: NIKAU_WS });
-    const fonterra = await createKeypair('./accounts/5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2.json', 'fonterra123');
+    const fonterra = await createKeypair('./util/5GhH2czRJFktx6mtLjj7jcD3fJPCHB3ofo3PMKAT7xzSRso2.json', 'fonterra123');
 
     const init_data = await _initialize(api);
 
@@ -67,6 +67,17 @@ async function main() {
     app.post('/addDelegate', (req, res) => {
         const address = req.body.address;
         util.delegatePermission(api, fonterra, address);
+    })
+
+    app.post('/mint', async (req, res) => {
+        const metadata = req.body.metadata;
+        await util.mintNew(api, fonterra, fonterra.address, 74, fonterra.address)
+            .then((tx) => {
+                console.log(tx)
+                res.send(`Success! Block hash: ${tx}`)
+            })
+
+
     })
 
     app.post('/revokeDelegate', async (req, res) => {

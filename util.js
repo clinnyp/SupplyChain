@@ -77,10 +77,54 @@ module.exports = {
      * @description creates new nft containing metadata from 'address' param. Mints on behalf of delgator and sends to tokenOwner
      */
     mintNew: async (api, delegator, address, collectionId, tokenOwner) => {
+        return new Promise(async (resolve, reject) => {
+            const ds = require('./util/dataSource.js');
+            const data = await ds(address);
+            var full = JSON.stringify(data);
+            const data_as_string = full.slice(150, 250);
+            console.log(full);
+
+            const attributes = [
+                {
+                    "Text": data_as_string
+                },
+                {
+                    "Timestamp": Date.now()
+                }
+            ];
+            const tokenExtrinsic = api.tx.nft.mintUnique(collectionId, tokenOwner, attributes, null, null);
+
+            await tokenExtrinsic.signAndSend(delegator, ({ status, events }) => {
+                if (status.isInBlock) {
+                    const txId = status.asInBlock.toString();
+                    events.forEach(({ phase, event: { data, method, section } }) => {
+                        console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
+                    });
+                    console.log(`Completed at block hash #${txId}`);
+                    resolve(txId)
+                }
+            }).catch((error) => {
+                console.log(':( transaction failed', error);
+                reject(error)
+            });
+        })
+
+    },
+
+    /**
+     * 
+     * @param {Api} api - Api Object 
+     * @param {KeyringPair} delegator - Delegator Keypair
+     * @param {String} address - User address
+     * @param {Number} collectionId - Colletion Id for tokens
+     * @param {String} tokenOwner - Token Owner address
+     * @description creates new nft containing metadata from 'address' param. Mints on behalf of delgator and sends to tokenOwner
+     */
+    mintNewSync: async (api, delegator, address, collectionId, tokenOwner) => {
         const ds = require('./util/dataSource.js');
         const data = await ds(address);
         var full = JSON.stringify(data);
-        const data_as_string = full.slice(0, 400);
+        const data_as_string = full.slice(150, 250);
         console.log(full);
 
         const attributes = [
@@ -93,17 +137,8 @@ module.exports = {
         ];
         const tokenExtrinsic = api.tx.nft.mintUnique(collectionId, tokenOwner, attributes, null, null);
 
-        tokenExtrinsic.signAndSend(delegator, ({ status, events }) => {
-            if (status.isInBlock) {
-                const txId = status.asInBlock.toString();
-                events.forEach(({ phase, event: { data, method, section } }) => {
-                    console.log('\t', phase.toString(), `: ${section}.${method}`, data.toString());
-                });
-                console.log(`Completed at block hash #${txId}`);
-            }
-        }).catch((error) => {
-            console.log(':( transaction failed', error);
-        });
+        return await tokenExtrinsic.signAndSend(delegator);
+
     },
 
     /**
