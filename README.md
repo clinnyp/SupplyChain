@@ -1,4 +1,4 @@
-# SupplyChan
+# SupplyChain
 
 A supply chain provenance project for the CENNZnet blockchain hackathon [TestNet (Nikau🌴](https://wiki.cennz.net/#/Getting-started/CENNZnet-networks), using the [CENNZnet API](https://github.com/cennznet/api.js).
 
