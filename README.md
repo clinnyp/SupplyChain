@@ -2,6 +2,9 @@
 
 A supply chain provenance project for the CENNZnet blockchain hackathon [TestNet (Nikau🌴](https://wiki.cennz.net/#/Getting-started/CENNZnet-networks), using the [CENNZnet API](https://github.com/cennznet/api.js).
 
+## Concept  
+Leveraging the use of CENNZnet's doughnuts protocol to allow governing bodies to delegate the minting of NFTs to producers.
+
 ## Install
 1) clone the repo
 2) `yarn`
