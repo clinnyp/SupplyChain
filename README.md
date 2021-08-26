@@ -14,7 +14,9 @@ Commendation: Team SupplyChains
 
 Not an official placer but commended by our judging panel was team Supply Chain. As the name suggests team SupplyChain’s focus was ironing out some of the many issues of verification in supply chains. Specifically, they were concerned with verifying the authenticity of valuable products such as Manuka honey when sold on the global market.
 
-<img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/presentation.jpeg">
+<p align="center">
+    <img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/presentation.jpeg">
+</p>
 
 The team impressed the judges with their use of the Doughnut protocol for their authentication solution. This protocol allows individuals or entities to delegate the ability to mint or use their tokens. It’s a powerful tool for users of DApps but one which team Supply Chain has put to use for authentication.
 
