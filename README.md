@@ -1,11 +1,10 @@
 <h1 align="center">
 SupplyChain
-<br>
-    <p align="center">
-    <img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/hackathon.jpeg">
-    </p>
 </h1>
 
+<p align="center">
+    <img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/hackathon.jpeg">
+</p>
 
 ## The Centrality CENNZnet Hackathon Challenge
 
@@ -17,7 +16,7 @@ The task at hand was broad, leaving plenty of room for teams to be creative and 
     <a href="https://medium.com/centrality/developing-real-world-use-cases-for-nfts-tech-week-2021-hackathon-a66da020d92a" target="_blank">
         [Link]
     </a>
-</h2>  
+</h2>
 
 <b>Commendation: </b> <u>SupplyChain</u>
 
@@ -37,22 +36,24 @@ How does their solution work?
 
 3. The authorised company can then mint these official NFTs and also imbed them with data which further establishes the value of the product. For example the GPS location of hives or purity readings of the honey.
 
-4. When the honey is then sold, buyers can easily check the authenticity of the product by checking its associated NFTs. 
+4. When the honey is then sold, buyers can easily check the authenticity of the product by checking its associated NFTs.
 
-The interesting aspect of team Supply Chain’s solution is that by using the Doughnut protocol, they ensure that the NFT denotes product authenticity. Someone cannot simply mint their own Manuka Honey NFTs, the authenticity is only verified if they can see the NFTs have been delegated by the Manuka Honey Association.
+The interesting aspect of team Supply Chain’s solution is that by using the Doughnut protocol, they ensure that the NFT denotes product authenticity. Someone cannot simply mint their own Manuka Honey NFTs, the authenticity is only verified if they can see the NFTs have been delegated by the Manuka Honey Association. Team SuppleChain was invited to talk to t
 
 ## Install
-1) clone the repo
-2) `yarn`
+
+1. clone the repo
+2. `yarn`
 
 ## Setup
-You can use the [CENNZnet Portal](https://cennznet.io/) to create an account. The keypair.json is downloaded to your machine when you create the account. 
+
+You can use the [CENNZnet Portal](https://cennznet.io/) to create an account. The keypair.json is downloaded to your machine when you create the account.
 
 Place the keypair json in the /accounts folder.
 
 ## Run it
-1) in the root directory, do ```node server.js```
-2) cd into the clients/ folder and run ```npm run dev```
+
+1. in the root directory, do `node server.js`
+2. cd into the clients/ folder and run `npm run dev`
 
 The user guide for the CENNZnet Portal can be found [here](https://wiki.cennz.net/#/References/CENNZnet-infrastructures/Exploring-the-CENNZnet-UI).
-
