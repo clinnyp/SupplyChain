@@ -1,7 +1,7 @@
 <h1 align="center">
 SupplyChain
 <br>
-<br>
+
     <p align="center">
     <img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/hackathon.jpeg">
     </p>
