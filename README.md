@@ -1,7 +1,6 @@
 <h1 align="center">
 SupplyChain
 <br>
-
     <p align="center">
     <img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/hackathon.jpeg">
     </p>
@@ -12,10 +11,10 @@ SupplyChain
 
 CENNZnet is a New Zealand built public blockchain and Decentralised Applications platform - a tech venture in the Centrality ecosystem https://centrality.ai/
 
-The task at hand was broad, leaving plenty of room for teams to be creative and also target their own passions. They were challenged to use the <a href="https://cennz.net/knowledge-hub/core-modules/introducing-the-cennznet-nft-module/">CENNZnet NFT module</a> to build a DApp or integrate them with an existing service.
+The task at hand was broad, leaving plenty of room for teams to be creative and also target their own passions. They were challenged to use the <a href="https://cennz.net/knowledge-hub/core-modules/introducing-the-cennznet-nft-module/" target="_blank">CENNZnet NFT module</a> to build a DApp or integrate them with an existing service.
 
 <h2>Blog by Centrality 
-    <a href="https://medium.com/centrality/developing-real-world-use-cases-for-nfts-tech-week-2021-hackathon-a66da020d92a">
+    <a href="https://medium.com/centrality/developing-real-world-use-cases-for-nfts-tech-week-2021-hackathon-a66da020d92a" target="_blank">
         [Link]
     </a>
 </h2>  
