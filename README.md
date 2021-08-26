@@ -1,6 +1,8 @@
-<h1 align="center">SupplyChain</h1>
+<h1 align="center">
+SupplyChain
+    <img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/hackathon.jpeg">
+</h1>
 
-<img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/hackathon.jpeg">
 
 ## The Centrality CENNZnet Hackathon Challenge
 
