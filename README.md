@@ -1,5 +1,7 @@
 <h1 align="center">SupplyChain</h1>
 
+<img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/hackathon.jpeg">
+
 A supply chain provenance project for the CENNZnet blockchain hackathon [TestNet (Nikau🌴](https://wiki.cennz.net/#/Getting-started/CENNZnet-networks), using the [CENNZnet API](https://github.com/cennznet/api.js).
 
 ## Concept  
