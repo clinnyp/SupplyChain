@@ -8,7 +8,7 @@ SupplyChain
 
 ## The Centrality CENNZnet Hackathon Challenge
 
-CENNZnet is a New Zealand built public blockchain and Decentralised Applications platform - a tech venture in the Centrality ecosystem https://centrality.ai/
+CENNZnet is a New Zealand built public blockchain and Decentralised Applications platform - a tech venture in the Centrality ecosystem https://cennz.net/
 
 The task at hand was broad, leaving plenty of room for teams to be creative and also target their own passions. They were challenged to use the <a href="https://cennz.net/knowledge-hub/core-modules/introducing-the-cennznet-nft-module/" target="_blank">CENNZnet NFT module</a> to build a DApp or integrate them with an existing service.
 
