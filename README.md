@@ -2,10 +2,33 @@
 
 <img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/hackathon.jpeg">
 
-A supply chain provenance project for the CENNZnet blockchain hackathon [TestNet (Nikau🌴](https://wiki.cennz.net/#/Getting-started/CENNZnet-networks), using the [CENNZnet API](https://github.com/cennznet/api.js).
+## The Centrality CENNZnet Hackathon Challenge
 
-## Concept  
-Leveraging the use of CENNZnet's doughnuts protocol to allow governing bodies to delegate the minting of NFTs to producers.
+CENNZnet is a New Zealand built public blockchain and Decentralised Applications platform - a tech venture in the Centrality ecosystem https://centrality.ai/
+
+
+
+## Blog by Centrality  
+
+Commendation: Team SupplyChains
+
+Not an official placer but commended by our judging panel was team Supply Chain. As the name suggests team SupplyChain’s focus was ironing out some of the many issues of verification in supply chains. Specifically, they were concerned with verifying the authenticity of valuable products such as Manuka honey when sold on the global market.
+
+<img src="https://github.com/clintonphilathong/SupplyChain/blob/main/public/images/presentation.jpeg">
+
+The team impressed the judges with their use of the Doughnut protocol for their authentication solution. This protocol allows individuals or entities to delegate the ability to mint or use their tokens. It’s a powerful tool for users of DApps but one which team Supply Chain has put to use for authentication.
+
+How does their solution work?
+
+1. An authorised and trusted entity (such as the Manuka Honey Association) has the authority to mint NFTs which establish that a product is genuine Manuka honey.
+
+2. The trusted entity uses the Doughnut protocol to delegate the minting of a set number of NFT tokens to other companies. For example, a certified Manuka Honey producer can be given the delegated authority to mint a certain number of Manuka Honey NFTs to authorise their latest batch.
+
+3. The authorised company can then mint these official NFTs and also imbed them with data which further establishes the value of the product. For example the GPS location of hives or purity readings of the honey.
+
+4. When the honey is then sold, buyers can easily check the authenticity of the product by checking its associated NFTs. 
+
+The interesting aspect of team Supply Chain’s solution is that by using the Doughnut protocol, they ensure that the NFT denotes product authenticity. Someone cannot simply mint their own Manuka Honey NFTs, the authenticity is only verified if they can see the NFTs have been delegated by the Manuka Honey Association.
 
 ## Install
 1) clone the repo
@@ -22,6 +45,3 @@ Place the keypair json in the /accounts folder.
 
 The user guide for the CENNZnet Portal can be found [here](https://wiki.cennz.net/#/References/CENNZnet-infrastructures/Exploring-the-CENNZnet-UI).
 
-## Output 
-```
-```
