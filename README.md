@@ -38,7 +38,7 @@ How does their solution work?
 
 4. When the honey is then sold, buyers can easily check the authenticity of the product by checking its associated NFTs.
 
-The interesting aspect of team Supply Chain’s solution is that by using the Doughnut protocol, they ensure that the NFT denotes product authenticity. Someone cannot simply mint their own Manuka Honey NFTs, the authenticity is only verified if they can see the NFTs have been delegated by the Manuka Honey Association. Team SuppleChain was invited to talk to t
+The interesting aspect of team Supply Chain’s solution is that by using the Doughnut protocol, they ensure that the NFT denotes product authenticity. Someone cannot simply mint their own Manuka Honey NFTs, the authenticity is only verified if they can see the NFTs have been delegated by the Manuka Honey Association. 
 
 ## Install
 
